@@ -29,7 +29,7 @@ func NewUserController(service *services.UserService) *UserController {
 // @Success 201 {object} models.User
 // @Failure 400 {object} view.Response
 // @Failure 500 {object} view.ResponseError
-// @Router /user/register [post]
+// @Router /users/register [post]
 func (c *UserController) Register(ctx *gin.Context) {
 	var req request.CreateUserRequest
 
@@ -68,7 +68,7 @@ func (c *UserController) Register(ctx *gin.Context) {
 // @Success 200 {object} view.ResponseLogin
 // @Failure 400 {object} view.Response
 // @Failure 500 {object} view.ResponseError
-// @Router /user/login [post]
+// @Router /users/login [post]
 func (c *UserController) Login(ctx *gin.Context) {
 	var req request.UserLoginRequest
 
@@ -90,7 +90,11 @@ func (c *UserController) Login(ctx *gin.Context) {
 	email, err := c.service.Login(&req)
 
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, view.Error(http.StatusInternalServerError, err.Error()))
+		if err.Error() == "crypto/bcrypt: hashedPassword is not the hash of the given password" {
+			ctx.JSON(http.StatusBadRequest, view.Error(http.StatusBadRequest, "Password is wrong"))
+		} else {
+			ctx.JSON(http.StatusInternalServerError, view.Error(http.StatusInternalServerError, err.Error()))
+		}
 		return
 	}
 
@@ -118,7 +122,7 @@ func (c *UserController) Login(ctx *gin.Context) {
 // @Failure 400 {object} view.Response
 // @Failure 401 {object} view.ResponseError
 // @Failure 500 {object} view.ResponseError
-// @Router /user/{userid} [put]
+// @Router /users/{userid} [put]
 // @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 func (c *UserController) Update(ctx *gin.Context) {
 	var req request.UpdateUserRequest
@@ -175,11 +179,10 @@ func (c *UserController) Update(ctx *gin.Context) {
 // @Tags User
 // @Accept  json
 // @Produce  json
-// @Param userid path int true "User ID"
 // @Success 200 {object} view.ResponseDeleteUser
 // @Failure 401 {object} view.ResponseError
 // @Failure 500 {object} view.ResponseError
-// @Router /user/{userid} [delete]
+// @Router /users [delete]
 // @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 func (c *UserController) Delete(ctx *gin.Context) {
 	email := ctx.GetString("email")

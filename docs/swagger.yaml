@@ -440,16 +440,28 @@ definitions:
       username:
         type: string
     type: object
+host: localhost:8081
 info:
-  contact: {}
+  contact:
+    email: fajaramaulana.dev@gmail.com
+    name: Swagger API Team
+    url: http://swagger.io
+  description: Hacktiv8 Scalable Web Service with Golang Final Project
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: MyGram API
+  version: "1.0"
 paths:
-  /comment:
+  /comments:
     get:
       consumes:
       - application/json
       description: Get All Comment By User Id
       parameters:
-      - description: Bearer Token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -477,7 +489,8 @@ paths:
       - application/json
       description: Create Comment
       parameters:
-      - description: Bearer Token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -510,13 +523,14 @@ paths:
       summary: Create Comment
       tags:
       - Comment
-  /comment/{commentid}:
+  /comments/{commentid}:
     delete:
       consumes:
       - application/json
       description: Delete Comment
       parameters:
-      - description: Bearer Token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -549,7 +563,8 @@ paths:
       - application/json
       description: Update Comment
       parameters:
-      - description: Bearer Token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -593,7 +608,8 @@ paths:
       - application/json
       description: Get All Photo
       parameters:
-      - description: Bearer token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -621,7 +637,8 @@ paths:
       - application/json
       description: Create Photo
       parameters:
-      - description: Bearer token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -660,7 +677,8 @@ paths:
       - application/json
       description: Delete Photo
       parameters:
-      - description: Bearer token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -693,7 +711,8 @@ paths:
       - application/json
       description: Update Photo
       parameters:
-      - description: Bearer token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -737,7 +756,8 @@ paths:
       - application/json
       description: Get Social Media
       parameters:
-      - description: Bearer Token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -769,7 +789,8 @@ paths:
       - application/json
       description: Create Social Media
       parameters:
-      - description: Bearer Token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -804,7 +825,8 @@ paths:
       - application/json
       description: Delete Social Media
       parameters:
-      - description: Bearer Token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -841,7 +863,8 @@ paths:
       - application/json
       description: Update Social Media
       parameters:
-      - description: Bearer Token
+      - default: Bearer <Add access token here>
+        description: Insert your access token
         in: header
         name: Authorization
         required: true
@@ -883,17 +906,12 @@ paths:
       summary: Update Social Media
       tags:
       - Social Media
-  /user/{userid}:
+  /users:
     delete:
       consumes:
       - application/json
       description: Delete User
       parameters:
-      - description: User ID
-        in: path
-        name: userid
-        required: true
-        type: integer
       - default: Bearer <Add access token here>
         description: Insert your access token
         in: header
@@ -918,6 +936,7 @@ paths:
       summary: Delete User
       tags:
       - User
+  /users/{userid}:
     put:
       consumes:
       - application/json
@@ -962,7 +981,7 @@ paths:
       summary: Update User
       tags:
       - User
-  /user/login:
+  /users/login:
     post:
       consumes:
       - application/json
@@ -992,7 +1011,7 @@ paths:
       summary: Login User
       tags:
       - User
-  /user/register:
+  /users/register:
     post:
       consumes:
       - application/json

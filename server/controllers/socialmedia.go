@@ -26,7 +26,7 @@ func NewSocmedController(socmedService *services.SocmedService, userService *ser
 // @Tags Social Media
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer Token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param body body request.CreateSocialMedia true "Create Social Media"
 // @Success 201 {object} view.ResponseCreateSocmed
 // @Failure 400 {object} view.Response
@@ -76,7 +76,7 @@ func (c *SocmedController) Create(ctx *gin.Context) {
 // @Tags Social Media
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer Token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Success 200 {object} view.ResponseGetSocmed
 // @Failure 401 {object} view.ResponseError
 // @Failure 404 {object} view.ResponseError
@@ -119,7 +119,7 @@ func (c *SocmedController) Get(ctx *gin.Context) {
 // @Tags Social Media
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer Token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param socialMediaId path int true "Social Media Id"
 // @Param body body request.UpdateSocialMedia true "Update Social Media"
 // @Success 200 {object} view.ResponseUpdateSocmed
@@ -184,7 +184,7 @@ func (c *SocmedController) Update(ctx *gin.Context) {
 // @Tags Social Media
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer Token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param socialMediaId path int true "Social Media Id"
 // @Success 200 {object} view.ResponseDeleteSocmed
 // @Failure 401 {object} view.ResponseError

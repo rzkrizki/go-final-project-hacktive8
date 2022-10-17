@@ -27,13 +27,13 @@ func NewCommentController(commentService *services.CommentService, userService *
 // @Tags Comment
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer Token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param body body request.CreateCommentRequest true "Create Comment"
 // @Success 201 {object} view.ResponseCreateComment
 // @Failure 400 {object} view.Response
 // @Failure 401 {object} view.ResponseError
 // @Failure 500 {object} view.ResponseError
-// @Router /comment [post]
+// @Router /comments [post]
 func (c *CommentController) Create(ctx *gin.Context) {
 	var req request.CreateCommentRequest
 
@@ -89,11 +89,11 @@ func (c *CommentController) Create(ctx *gin.Context) {
 // @Tags Comment
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer Token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Success 200 {object} view.ResponseGetAllComment
 // @Failure 401 {object} view.ResponseError
 // @Failure 500 {object} view.ResponseError
-// @Router /comment [get]
+// @Router /comments [get]
 func (c *CommentController) GetAll(ctx *gin.Context) {
 	email := ctx.GetString("email")
 	idUser, err := c.userService.GetUserIdByEmail(email)
@@ -120,14 +120,14 @@ func (c *CommentController) GetAll(ctx *gin.Context) {
 // @Tags Comment
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer Token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param commentid path int true "Comment Id"
 // @Param body body request.UpdateCommentRequest true "Update Comment"
 // @Success 200 {object} view.ResponseUpdateComment
 // @Failure 400 {object} view.Response
 // @Failure 401 {object} view.ResponseError
 // @Failure 500 {object} view.ResponseError
-// @Router /comment/{commentid} [put]
+// @Router /comments/{commentid} [put]
 func (c *CommentController) Update(ctx *gin.Context) {
 	var req request.UpdateCommentRequest
 	idComment := ctx.Param("commentid")
@@ -180,12 +180,12 @@ func (c *CommentController) Update(ctx *gin.Context) {
 // @Tags Comment
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer Token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param commentid path int true "Comment Id"
 // @Success 200 {object} view.ResponseDeleteComment
 // @Failure 401 {object} view.ResponseError
 // @Failure 500 {object} view.ResponseError
-// @Router /comment/{commentid} [delete]
+// @Router /comments/{commentid} [delete]
 func (c *CommentController) Delete(ctx *gin.Context) {
 	idComment := ctx.Param("commentid")
 

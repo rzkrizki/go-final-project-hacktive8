@@ -10,13 +10,22 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Swagger API Team",
+            "url": "http://swagger.io",
+            "email": "fajaramaulana.dev@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/comment": {
+        "/comments": {
             "get": {
                 "description": "Get All Comment By User Id",
                 "consumes": [
@@ -32,7 +41,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer Token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -74,7 +84,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer Token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -117,7 +128,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/comment/{commentid}": {
+        "/comments/{commentid}": {
             "put": {
                 "description": "Update Comment",
                 "consumes": [
@@ -133,7 +144,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer Token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -197,7 +209,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer Token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -248,7 +261,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -290,7 +304,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -349,7 +364,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -413,7 +429,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -464,7 +481,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer Token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -512,7 +530,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer Token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -565,7 +584,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer Token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -635,7 +655,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Bearer Token",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
                         "name": "Authorization",
                         "in": "header",
                         "required": true
@@ -676,7 +697,52 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/login": {
+        "/users": {
+            "delete": {
+                "description": "Delete User",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete User",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/view.ResponseDeleteUser"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/view.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/view.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/login": {
             "post": {
                 "description": "Login User",
                 "consumes": [
@@ -722,7 +788,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/register": {
+        "/users/register": {
             "post": {
                 "description": "Register User",
                 "consumes": [
@@ -768,7 +834,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/{userid}": {
+        "/users/{userid}": {
             "put": {
                 "description": "Update User",
                 "consumes": [
@@ -818,56 +884,6 @@ const docTemplate = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/view.Response"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/view.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/view.ResponseError"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "description": "Delete User",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User"
-                ],
-                "summary": "Delete User",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "User ID",
-                        "name": "userid",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "default": "Bearer \u003cAdd access token here\u003e",
-                        "description": "Insert your access token",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/view.ResponseDeleteUser"
                         }
                     },
                     "401": {
@@ -1554,12 +1570,12 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
+	Version:          "1.0",
+	Host:             "localhost:8081",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "MyGram API",
+	Description:      "Hacktiv8 Scalable Web Service with Golang Final Project",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

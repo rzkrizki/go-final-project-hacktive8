@@ -47,6 +47,10 @@ func (s *PhotoService) GetAll() ([]view.ResponseGetAllPhoto, error) {
 		return []view.ResponseGetAllPhoto{}, err
 	}
 
+	if len(data) == 0 {
+		return []view.ResponseGetAllPhoto{}, errors.New("No Data")
+	}
+
 	var response []view.ResponseGetAllPhoto
 
 	for _, v := range data {

@@ -26,7 +26,7 @@ func NewPhotoController(photoService *services.PhotoService, userService *servic
 // @Tags Photo
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param body body request.CreatePhotoRequest true "Create Photo"
 // @Success 201 {object} view.ResponseCreatePhoto
 // @Failure 400 {object} view.Response
@@ -80,7 +80,7 @@ func (c *PhotoController) Create(ctx *gin.Context) {
 // @Tags Photo
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Success 200 {object} view.ResponseGetAllPhoto
 // @Failure 401 {object} view.ResponseError
 // @Failure 500 {object} view.ResponseError
@@ -91,6 +91,11 @@ func (c *PhotoController) GetAll(ctx *gin.Context) {
 	if err != nil {
 		if err.Error() == "Unauthorized" {
 			ctx.JSON(http.StatusUnauthorized, view.Error(http.StatusUnauthorized, err.Error()))
+			return
+		}
+
+		if err.Error() == "No Data" {
+			ctx.JSON(http.StatusNotFound, view.Error(http.StatusNotFound, err.Error()))
 			return
 		}
 
@@ -107,7 +112,7 @@ func (c *PhotoController) GetAll(ctx *gin.Context) {
 // @Tags Photo
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param photoid path int true "Photo ID"
 // @Param body body request.UpdatePhotoRequest true "Update Photo"
 // @Success 200 {object} view.ResponseUpdatePhoto
@@ -171,7 +176,7 @@ func (c PhotoController) Update(ctx *gin.Context) {
 // @Tags Photo
 // @Accept  json
 // @Produce  json
-// @Param Authorization header string true "Bearer token"
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param photoid path int true "Photo ID"
 // @Success 200 {object} view.ResponseDeletePhoto
 // @Failure 401 {object} view.ResponseError
