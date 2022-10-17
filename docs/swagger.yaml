@@ -1,0 +1,1025 @@
+definitions:
+  models.Comment:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      message:
+        type: string
+      photo:
+        $ref: '#/definitions/models.Photo'
+      photoId:
+        type: integer
+      updatedAt:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userId:
+        type: integer
+    type: object
+  models.Photo:
+    properties:
+      caption:
+        type: string
+      comments:
+        items:
+          $ref: '#/definitions/models.Comment'
+        type: array
+      createdAt:
+        type: string
+      id:
+        type: integer
+      photoUrl:
+        type: string
+      title:
+        type: string
+      updatedAt:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userId:
+        type: integer
+    type: object
+  models.SocialMedia:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      socialMediaUrl:
+        type: string
+      updatedAt:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userId:
+        type: integer
+    type: object
+  models.User:
+    properties:
+      age:
+        type: integer
+      comments:
+        items:
+          $ref: '#/definitions/models.Comment'
+        type: array
+      createdAt:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      photos:
+        items:
+          $ref: '#/definitions/models.Photo'
+        type: array
+      socialMedias:
+        items:
+          $ref: '#/definitions/models.SocialMedia'
+        type: array
+      updatedAt:
+        type: string
+      username:
+        type: string
+    type: object
+  request.CreateCommentRequest:
+    properties:
+      message:
+        example: Hello World
+        type: string
+      photo_id:
+        example: 1
+        type: integer
+    required:
+    - message
+    - photo_id
+    type: object
+  request.CreatePhotoRequest:
+    properties:
+      caption:
+        example: Scalable Web Service With Golang Hacktiv8
+        type: string
+      photo_url:
+        example: https://s3.amazonaws.com/thinkific-import/236035/course_player_logo/1587702886996LogoKode2020light.png
+        type: string
+      title:
+        example: Hacktiv8
+        type: string
+    required:
+    - photo_url
+    - title
+    type: object
+  request.CreateSocialMedia:
+    properties:
+      name:
+        example: Fajar
+        type: string
+      social_media_url:
+        example: https://twitter.com/fajaramaulana
+        type: string
+    required:
+    - name
+    - social_media_url
+    type: object
+  request.CreateUserRequest:
+    properties:
+      age:
+        example: 20
+        type: integer
+      email:
+        example: fajar@gmail.com
+        type: string
+      password:
+        example: hahahihilulus
+        minLength: 6
+        type: string
+      username:
+        example: fajar
+        type: string
+    required:
+    - age
+    - email
+    - password
+    - username
+    type: object
+  request.UpdateCommentRequest:
+    properties:
+      message:
+        example: Hello World
+        type: string
+    required:
+    - message
+    type: object
+  request.UpdatePhotoRequest:
+    properties:
+      caption:
+        example: Scalable Web Service With Golang Hacktiv8
+        type: string
+      photo_url:
+        example: https://s3.amazonaws.com/thinkific-import/236035/course_player_logo/1587702886996LogoKode2020light.png
+        type: string
+      title:
+        example: Hacktiv8
+        type: string
+    required:
+    - photo_url
+    - title
+    type: object
+  request.UpdateSocialMedia:
+    properties:
+      name:
+        example: Fajar
+        type: string
+      social_media_url:
+        example: https://twitter.com/fajaramaulana
+        type: string
+    required:
+    - name
+    - social_media_url
+    type: object
+  request.UpdateUserRequest:
+    properties:
+      email:
+        example: fajar@gmail.com
+        type: string
+      username:
+        example: fajar
+        type: string
+    required:
+    - email
+    - username
+    type: object
+  request.UserLoginRequest:
+    properties:
+      email:
+        example: fajar@gmail.com
+        type: string
+      password:
+        example: hahahihilulus
+        minLength: 6
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  view.Response:
+    properties:
+      message:
+        type: string
+      payload:
+        additionalProperties:
+          type: string
+        type: object
+      status:
+        type: integer
+    type: object
+  view.ResponseCreateComment:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      message:
+        type: string
+      photo_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+  view.ResponseCreatePhoto:
+    properties:
+      caption:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      photo_url:
+        type: string
+      title:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  view.ResponseCreateSocmed:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      social_media_url:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  view.ResponseDeleteComment:
+    properties:
+      message:
+        type: string
+    type: object
+  view.ResponseDeletePhoto:
+    properties:
+      message:
+        type: string
+    type: object
+  view.ResponseDeleteSocmed:
+    properties:
+      message:
+        type: string
+    type: object
+  view.ResponseDeleteUser:
+    properties:
+      message:
+        type: string
+    type: object
+  view.ResponseError:
+    properties:
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+  view.ResponseGetAllComment:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      message:
+        type: string
+      photo:
+        $ref: '#/definitions/view.ResponseWithPhotoIdComment'
+      photo_id:
+        type: integer
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/view.ResponseWithUserIdComment'
+      user_id:
+        type: integer
+    type: object
+  view.ResponseGetAllPhoto:
+    properties:
+      caption:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      photo_url:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/view.ResponseWithUserId'
+      user_id:
+        type: integer
+    type: object
+  view.ResponseGetSocmed:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      social_media_url:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/view.ResponseWithUserIdSocmed'
+      user_id:
+        type: integer
+    type: object
+  view.ResponseLogin:
+    properties:
+      token:
+        type: string
+    type: object
+  view.ResponseUpdateComment:
+    properties:
+      caption:
+        type: string
+      id:
+        type: integer
+      photo_url:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  view.ResponseUpdatePhoto:
+    properties:
+      caption:
+        type: string
+      id:
+        type: integer
+      photo_url:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  view.ResponseUpdateSocmed:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      social_media_url:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  view.ResponseUpdateUser:
+    properties:
+      age:
+        type: integer
+      email:
+        type: string
+      id:
+        type: integer
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  view.ResponseWithPhotoIdComment:
+    properties:
+      caption:
+        type: string
+      id:
+        type: integer
+      photo_url:
+        type: string
+      title:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  view.ResponseWithUserId:
+    properties:
+      email:
+        type: string
+      username:
+        type: string
+    type: object
+  view.ResponseWithUserIdComment:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      username:
+        type: string
+    type: object
+  view.ResponseWithUserIdSocmed:
+    properties:
+      id:
+        type: integer
+      profile_image_url:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /comment:
+    get:
+      consumes:
+      - application/json
+      description: Get All Comment By User Id
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseGetAllComment'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Get All Comment By User Id
+      tags:
+      - Comment
+    post:
+      consumes:
+      - application/json
+      description: Create Comment
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Create Comment
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateCommentRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/view.ResponseCreateComment'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/view.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Create Comment
+      tags:
+      - Comment
+  /comment/{commentid}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Comment
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Comment Id
+        in: path
+        name: commentid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseDeleteComment'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Delete Comment
+      tags:
+      - Comment
+    put:
+      consumes:
+      - application/json
+      description: Update Comment
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Comment Id
+        in: path
+        name: commentid
+        required: true
+        type: integer
+      - description: Update Comment
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdateCommentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseUpdateComment'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/view.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Update Comment
+      tags:
+      - Comment
+  /photos:
+    get:
+      consumes:
+      - application/json
+      description: Get All Photo
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseGetAllPhoto'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Get All Photo
+      tags:
+      - Photo
+    post:
+      consumes:
+      - application/json
+      description: Create Photo
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Create Photo
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreatePhotoRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/view.ResponseCreatePhoto'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/view.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Create Photo
+      tags:
+      - Photo
+  /photos/{photoid}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Photo
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Photo ID
+        in: path
+        name: photoid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseDeletePhoto'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Delete Photo
+      tags:
+      - Photo
+    put:
+      consumes:
+      - application/json
+      description: Update Photo
+      parameters:
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Photo ID
+        in: path
+        name: photoid
+        required: true
+        type: integer
+      - description: Update Photo
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdatePhotoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseUpdatePhoto'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/view.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Update Photo
+      tags:
+      - Photo
+  /socialmedias:
+    get:
+      consumes:
+      - application/json
+      description: Get Social Media
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseGetSocmed'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Get Social Media
+      tags:
+      - Social Media
+    post:
+      consumes:
+      - application/json
+      description: Create Social Media
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Create Social Media
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateSocialMedia'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/view.ResponseCreateSocmed'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/view.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Create Social Media
+      tags:
+      - Social Media
+  /socialmedias/{socialMediaId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Social Media
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Social Media Id
+        in: path
+        name: socialMediaId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseDeleteSocmed'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Delete Social Media
+      tags:
+      - Social Media
+    put:
+      consumes:
+      - application/json
+      description: Update Social Media
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Social Media Id
+        in: path
+        name: socialMediaId
+        required: true
+        type: integer
+      - description: Update Social Media
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdateSocialMedia'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseUpdateSocmed'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/view.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Update Social Media
+      tags:
+      - Social Media
+  /user/{userid}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete User
+      parameters:
+      - description: User ID
+        in: path
+        name: userid
+        required: true
+        type: integer
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseDeleteUser'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Delete User
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: Update User
+      parameters:
+      - description: User ID
+        in: path
+        name: userid
+        required: true
+        type: integer
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdateUserRequest'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseUpdateUser'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/view.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Update User
+      tags:
+      - User
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      description: Login User
+      parameters:
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/request.UserLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/view.ResponseLogin'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/view.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Login User
+      tags:
+      - User
+  /user/register:
+    post:
+      consumes:
+      - application/json
+      description: Register User
+      parameters:
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/view.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/view.ResponseError'
+      summary: Register User
+      tags:
+      - User
+swagger: "2.0"
